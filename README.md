@@ -12,7 +12,7 @@ A especificação e o backlog vivem em **`docs/`**. A implementação (Node, Hon
 2. `cp .env.example .env` ou `.env.local` e ajustar segredos (mínimo: `DATABASE_URL`, `JWT_SECRET` com ≥32 caracteres). Se existirem os dois, **`.env.local` sobrescreve** `.env`.
 3. `docker compose up -d` para PostgreSQL e Redis (opcional até cache/rate limit).
 4. `npm install` (configura **git hooks** em `core.hooksPath=.githooks`; pushes de branch exigem `CHANGELOG.md` no conjunto de alterações — ver [docs/git/git-strategy.md](docs/git/git-strategy.md#git-hooks-pre-push)).
-5. `npm run db:migrate` para aplicar migrations (schema + RLS). `npm run db:seed` opcional — tenant demo `demo` (owner `owner@demo.local`, senha `password`).
+5. `npm run db:migrate` para aplicar migrations (schema + RLS). No `docker-compose` deste repo o Postgres expõe **`localhost:5433`** → **5432** no contentor (o mapeamento tem de ser `5433:5432`, não `5433:5433`). Se aparecer **password authentication failed (28P01)** ou **Connection terminated unexpectedly**, usa **`npm run db:migrate:docker`** e confirma `DATABASE_URL` em `.env.local` (porta **5433** se usares o compose tal como está). `npm run db:seed` opcional — tenant demo `demo` (owner `owner@demo.local`, senha `password`).
 6. `npm run dev` — API em `http://localhost:3000` (variável `PORT`).
 7. Qualidade: `npm run lint`, `npm run typecheck`, `npm test`, `npm run format:check`.
 

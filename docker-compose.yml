@@ -7,7 +7,8 @@ services:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: temhorario_engine
     ports:
-      - '5432:5432'
+      # host:contentor — Postgres escuta em 5432 *dentro* do contentor
+      - '5433:5432'
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
