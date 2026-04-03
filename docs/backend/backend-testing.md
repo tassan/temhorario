@@ -245,6 +245,18 @@
 | I101 | Deve retornar headers X-RateLimit-* corretos | [ ] |
 | I102 | Deve aplicar rate limit por tenant em rotas admin | [ ] |
 
+_(Implementação em `src/middleware/rate-limit.ts`; testes I100–I102 ainda cobertos manualmente / CI — cenários 429 podem ser adicionados com `RATE_LIMIT_*` baixo em teste dedicado.)_
+
+### Middleware (Épico 3)
+
+| # | Teste | Status |
+|---|---|---|
+| M01 | JWT: assinar e verificar access token (`tests/unit/jwt.test.ts`) | [x] `2026-04-03` |
+| M02 | Admin: 401 sem token; 200 com JWT em `/v1/admin/ping` | [x] `2026-04-03` |
+| M03 | Público: resolver tenant por slug em `/v1/:slug/ping` (requer DB) | [x] `2026-04-03` |
+| M04 | Tenant inexistente: 404 `NOT_FOUND` | [x] `2026-04-03` |
+| M05 | Platform: 401; 200 com API key válida (requer DB) | [x] `2026-04-03` |
+
 ---
 
 ## Métricas de Cobertura

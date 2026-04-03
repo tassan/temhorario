@@ -3,10 +3,35 @@ import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const dir = fileURLToPath(new URL('.', import.meta.url));
-config({ path: resolve(dir, '../.env.test') });
+const envTestPath = resolve(dir, '../.env.test');
+
+const isCi = process.env.CI === 'true' || process.env.GITHUB_ACTIONS === 'true';
+const databaseUrlFromCi = isCi ? process.env.DATABASE_URL : undefined;
+
+delete process.env.DATABASE_URL;
+config({ path: envTestPath, override: true });
+
+/** URL alinhada ao `docker-compose` (postgres/postgres). Sobrescrever com `VITEST_DATABASE_URL`. */
+const defaultTestDatabaseUrl = 'postgresql://postgres:postgres@127.0.0.1:5432/temhorario_test';
+
+function pickDatabaseUrl(url: string | undefined, fallback: string): string {
+  return url !== undefined && url !== '' ? url : fallback;
+}
 
 process.env.NODE_ENV ??= 'test';
-process.env.DATABASE_URL ??= 'postgresql://postgres:postgres@localhost:5432/temhorario_test';
+
+if (process.env.VITEST_DATABASE_URL !== undefined) {
+  process.env.DATABASE_URL = process.env.VITEST_DATABASE_URL;
+} else if (isCi) {
+  process.env.DATABASE_URL = pickDatabaseUrl(databaseUrlFromCi, defaultTestDatabaseUrl);
+} else {
+  process.env.DATABASE_URL = pickDatabaseUrl(
+    process.env.DATABASE_URL as string | undefined,
+    defaultTestDatabaseUrl,
+  );
+}
 process.env.JWT_SECRET ??= 'test-jwt-secret-must-be-32-chars-min!!';
 process.env.JWT_ACCESS_TTL ??= '900';
 process.env.JWT_REFRESH_TTL ??= '604800';
+process.env.RATE_LIMIT_PUBLIC_PER_MINUTE ??= '100000';
+process.env.RATE_LIMIT_ADMIN_PER_MINUTE ??= '100000';

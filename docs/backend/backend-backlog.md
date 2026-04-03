@@ -19,7 +19,7 @@
 |---|---|
 | Sprint atual | Schema / API |
 | Última atualização | `2026-04-03` |
-| Itens concluídos | 9 (Épico 1) + 13 (Épico 2) |
+| Itens concluídos | 9 (Épico 1) + 13 (Épico 2) + 5 (Épico 3) |
 | Itens em andamento | 0 |
 | Itens a fazer | Total abaixo |
 
@@ -73,15 +73,15 @@ _(nenhum — Épico 2 concluído)_
 
 ### A Fazer
 
-- [ ] Implementar `error-handler.ts` — formato de erro padrão, logging
-- [ ] Implementar `tenant.ts` — resolve tenant por slug (público) ou JWT (admin)
-- [ ] Implementar `auth.ts` — validação JWT, extração de claims
-- [ ] Implementar `api-key.ts` — validação de API key via hash
-- [ ] Implementar `rate-limit.ts` — rate limiting por IP (público) e por tenant (admin)
+_(nenhum — Épico 3 concluído)_
 
 ### Concluído
 
-_(vazio)_
+- [x] ~~Implementar `error-handler.ts` — formato de erro padrão, logging~~ — `2026-04-03` — _`createErrorHandler(env)`; `AppError` / `ZodError` / fallback 500; logger JSON por `LOG_LEVEL`; mensagem de erro interna só fora de `production`_
+- [x] ~~Implementar `tenant.ts` — resolve tenant por slug (público) ou JWT (admin)~~ — `2026-04-03` — _`createTenantFromSlugMiddleware` para `/v1/:slug/*`; admin usa JWT (`tenantId` nos claims), não slug_
+- [x] ~~Implementar `auth.ts` — validação JWT, extração de claims~~ — `2026-04-03` — _HS256 via `jose`; claims `tenantId`, `sub`, `role`; rotas em `/v1/admin/*`_
+- [x] ~~Implementar `api-key.ts` — validação de API key via hash~~ — `2026-04-03` — _Bearer `ae_live_...`; SHA-256; lookup em `api_keys`; `/v1/platform/*`_
+- [x] ~~Implementar `rate-limit.ts` — rate limiting por IP (público) e por tenant (admin)~~ — `2026-04-03` — _janela 60s; Redis opcional (`REDIS_URL`); fallback em memória; headers `X-RateLimit-*` e `Retry-After`_
 
 ---
 
@@ -280,7 +280,7 @@ _(Adicionar itens aqui conforme surgirem durante o desenvolvimento)_
 
 | Item | Prioridade | Contexto |
 |---|---|---|
-| _(vazio)_ | | |
+| `SET app.current_tenant_id` por request com connection pool | Média | RLS em `0001_row_level_security.sql` exige `set_config` na sessão; middleware define `tenantId` no contexto Hono — integração fina com pool/`SET LOCAL` quando serviços forem executar queries com RLS ativo por conexão. |
 
 ---
 
