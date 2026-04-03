@@ -8,6 +8,7 @@ export * from './availability-rules.js';
 export * from './clients.js';
 export * from './bookings.js';
 export * from './api-keys.js';
+export * from './refresh-tokens.js';
 
 import { relations } from 'drizzle-orm';
 
@@ -19,6 +20,7 @@ import { resourceServices } from './resource-services.js';
 import { resources } from './resources.js';
 import { services } from './services.js';
 import { tenants } from './tenants.js';
+import { refreshTokens } from './refresh-tokens.js';
 import { users } from './users.js';
 
 export const tenantsRelations = relations(tenants, ({ many }) => ({
@@ -31,8 +33,13 @@ export const tenantsRelations = relations(tenants, ({ many }) => ({
   apiKeys: many(apiKeys),
 }));
 
-export const usersRelations = relations(users, ({ one }) => ({
+export const usersRelations = relations(users, ({ one, many }) => ({
   tenant: one(tenants, { fields: [users.tenantId], references: [tenants.id] }),
+  refreshTokens: many(refreshTokens),
+}));
+
+export const refreshTokensRelations = relations(refreshTokens, ({ one }) => ({
+  user: one(users, { fields: [refreshTokens.userId], references: [users.id] }),
 }));
 
 export const servicesRelations = relations(services, ({ one, many }) => ({

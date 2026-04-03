@@ -19,7 +19,7 @@
 |---|---|
 | Sprint atual | Schema / API |
 | Última atualização | `2026-04-03` |
-| Itens concluídos | 9 (Épico 1) + 13 (Épico 2) + 5 (Épico 3) |
+| Itens concluídos | 9 (Épico 1) + 13 (Épico 2) + 5 (Épico 3) + 6 (Épico 4) |
 | Itens em andamento | 0 |
 | Itens a fazer | Total abaixo |
 
@@ -89,15 +89,15 @@ _(nenhum — Épico 3 concluído)_
 
 ### A Fazer
 
-- [ ] Implementar `POST /v1/auth/login` — email + senha → JWT
-- [ ] Implementar `POST /v1/auth/refresh` — refresh token rotation
-- [ ] Implementar hash de senha com bcrypt (cost 12)
-- [ ] Implementar geração e validação de JWT (access + refresh)
-- [ ] Testes de integração: login, refresh, token expirado, credenciais inválidas
+_(nenhum — Épico 4 concluído)_
 
 ### Concluído
 
-_(vazio)_
+- [x] ~~Implementar `POST /v1/auth/login` — email + senha → JWT~~ — `2026-04-03` — _`src/modules/auth/`; resposta `{ accessToken, refreshToken, expiresIn, tokenType }`_
+- [x] ~~Implementar `POST /v1/auth/refresh` — refresh token rotation~~ — `2026-04-03` — _JWT refresh com `jti`; tabela `refresh_tokens`; rotação em transacção (revoga o `jti` usado)_
+- [x] ~~Implementar hash de senha com bcrypt (cost 12)~~ — `2026-04-03` — _`src/lib/password.ts` (`hashPassword` / `verifyPassword`)_
+- [x] ~~Implementar geração e validação de JWT (access + refresh)~~ — `2026-04-03` — _`src/lib/jwt.ts`: access com `typ: 'access'`; refresh com `typ: 'refresh'` + `jti` (impede troca de access por refresh)_
+- [x] ~~Testes de integração: login, refresh, token expirado, credenciais inválidas~~ — `2026-04-03` — _`tests/integration/auth.test.ts`, `middleware-auth.test.ts`; unitário refresh expirado em `tests/unit/jwt.test.ts`_
 
 ---
 

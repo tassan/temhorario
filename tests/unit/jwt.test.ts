@@ -1,7 +1,13 @@
+import { SignJWT } from 'jose';
 import { describe, expect, it } from 'vitest';
 
 import { loadEnv } from '../../src/config/env.js';
-import { signAccessToken, verifyAccessToken } from '../../src/lib/jwt.js';
+import {
+  signAccessToken,
+  signRefreshToken,
+  verifyAccessToken,
+  verifyRefreshToken,
+} from '../../src/lib/jwt.js';
 
 describe('JWT access token', () => {
   it('deve assinar e verificar claims', async () => {
@@ -16,5 +22,43 @@ describe('JWT access token', () => {
     expect(payload.tenantId).toBe(tenantId);
     expect(payload.sub).toBe(sub);
     expect(payload.role).toBe('owner');
+    expect(payload.typ).toBe('access');
+  });
+});
+
+describe('JWT refresh token', () => {
+  it('deve assinar e verificar jti e claims', async () => {
+    const env = loadEnv({
+      DATABASE_URL: 'postgresql://u:p@localhost:5432/db',
+      JWT_SECRET: 'x'.repeat(32),
+    });
+    const tenantId = '00000000-0000-4000-8000-000000000001';
+    const sub = '00000000-0000-4000-8000-000000000002';
+    const jti = '00000000-0000-4000-8000-000000000003';
+    const token = await signRefreshToken(env, { tenantId, sub, role: 'staff', jti });
+    const payload = await verifyRefreshToken(env, token);
+    expect(payload.jti).toBe(jti);
+    expect(payload.typ).toBe('refresh');
+    expect(payload.role).toBe('staff');
+  });
+
+  it('deve falhar verificação quando refresh está expirado', async () => {
+    const env = loadEnv({
+      DATABASE_URL: 'postgresql://u:p@localhost:5432/db',
+      JWT_SECRET: 'x'.repeat(32),
+    });
+    const tenantId = '00000000-0000-4000-8000-000000000001';
+    const sub = '00000000-0000-4000-8000-000000000002';
+    const jti = '00000000-0000-4000-8000-000000000003';
+    const key = new TextEncoder().encode(env.JWT_SECRET);
+    const expired = await new SignJWT({ tenantId, role: 'owner', typ: 'refresh' })
+      .setProtectedHeader({ alg: 'HS256' })
+      .setSubject(sub)
+      .setJti(jti)
+      .setIssuedAt()
+      .setExpirationTime(Math.floor(Date.now() / 1000) - 60)
+      .sign(key);
+
+    await expect(verifyRefreshToken(env, expired)).rejects.toThrow();
   });
 });

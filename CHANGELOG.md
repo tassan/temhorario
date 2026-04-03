@@ -8,6 +8,8 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ### Added
 
+- **Épico 4 — autenticação:** `POST /v1/auth/login` (email + senha → access + refresh JWT); `POST /v1/auth/refresh` com rotação (revoga `jti` anterior); `bcrypt` em `dependencies` e `src/lib/password.ts` (cost 12); tabela `refresh_tokens` + RLS (`0002_refresh_tokens.sql`); access token com `typ: 'access'`, refresh com `typ: 'refresh'` e `jti`. Testes em `tests/integration/auth.test.ts`, `middleware-auth.test.ts`, `tests/unit/jwt.test.ts`. Matriz I01–I08 em `docs/backend/backend-testing.md`.
+
 - `npm run db:ensure` (`scripts/ensure-postgres-docker.ts`) + `docker/postgres/init/01-ensure-role.sql` montado em `docker-entrypoint-initdb.d`: garante role `postgres` (password do compose) e base `temhorario_engine`; `db:migrate:docker` / `db:seed:docker` executam `db:ensure` antes.
 - `npm run db:migrate:docker` e `.env.docker` para migrar contra o Postgres do `docker-compose` quando `DATABASE_URL` / `.env.local` apontam para outro servidor; mensagem de ajuda em `28P01` em `scripts/migrate.ts`.
 - **Testes / migrate:** `tests/setup.ts` ignora `DATABASE_URL` herdada do shell; fora de CI usa por omissão `127.0.0.1:5433/temhorario_test` (CI: `5432`). `MIGRATE_DATABASE_URL` em `load-env-files.ts` permite migrar sem ser sobrescrito por `.env.local`.

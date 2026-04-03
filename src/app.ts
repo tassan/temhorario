@@ -7,6 +7,7 @@ import { createJwtAuthMiddleware } from './middleware/auth.js';
 import { createPublicIpRateLimiter, createTenantRateLimiter } from './middleware/rate-limit.js';
 import { requestIdMiddleware } from './middleware/request-id.js';
 import { createTenantFromSlugMiddleware } from './middleware/tenant.js';
+import { createAuthRoutes } from './modules/auth/auth.routes.js';
 import type { AppVariables } from './types/hono.js';
 
 export function createApp(env: Env): Hono<{ Variables: AppVariables }> {
@@ -50,8 +51,13 @@ export function createApp(env: Env): Hono<{ Variables: AppVariables }> {
     }),
   );
 
+  const authPublic = new Hono<{ Variables: AppVariables }>();
+  authPublic.use('*', createPublicIpRateLimiter(env));
+  authPublic.route('/', createAuthRoutes(env));
+
   v1.route('/admin', admin);
   v1.route('/platform', platform);
+  v1.route('/auth', authPublic);
   v1.route('/:slug', publicBySlug);
 
   app.route('/v1', v1);

@@ -115,14 +115,14 @@
 
 | # | Teste | Status |
 |---|---|---|
-| I01 | POST /auth/login — deve retornar tokens com credenciais válidas | [ ] |
-| I02 | POST /auth/login — deve retornar 401 com email inexistente | [ ] |
-| I03 | POST /auth/login — deve retornar 401 com senha incorreta | [ ] |
-| I04 | POST /auth/refresh — deve retornar novos tokens com refresh válido | [ ] |
-| I05 | POST /auth/refresh — deve retornar 401 com refresh expirado | [ ] |
-| I06 | POST /auth/refresh — deve invalidar refresh token anterior (rotação) | [ ] |
-| I07 | Rotas admin devem retornar 401 sem token | [ ] |
-| I08 | Rotas admin devem retornar 401 com token expirado | [ ] |
+| I01 | POST `/v1/auth/login` — deve retornar tokens com credenciais válidas | [x] |
+| I02 | POST `/v1/auth/login` — deve retornar 401 com email inexistente | [x] |
+| I03 | POST `/v1/auth/login` — deve retornar 401 com senha incorreta | [x] |
+| I04 | POST `/v1/auth/refresh` — deve retornar novos tokens com refresh válido | [x] |
+| I05 | POST `/v1/auth/refresh` — deve retornar 401 com refresh expirado | [x] |
+| I06 | POST `/v1/auth/refresh` — deve invalidar refresh token anterior (rotação) | [x] |
+| I07 | Rotas admin devem retornar 401 sem token | [x] |
+| I08 | Rotas admin devem retornar 401 com token expirado | [x] |
 
 ### Tenants (`tenants.test.ts`)
 
