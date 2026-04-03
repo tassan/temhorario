@@ -18,8 +18,8 @@
 | Métrica | Valor |
 |---|---|
 | Sprint atual | Setup inicial |
-| Última atualização | _Pendente primeiro commit_ |
-| Itens concluídos | 0 |
+| Última atualização | `2026-04-03` |
+| Itens concluídos | 9 (Épico 1) |
 | Itens em andamento | 0 |
 | Itens a fazer | Total abaixo |
 
@@ -29,19 +29,19 @@
 
 ### A Fazer
 
-- [ ] Inicializar projeto Node.js com TypeScript strict mode
-- [ ] Configurar Hono como framework HTTP
-- [ ] Configurar Drizzle ORM com PostgreSQL driver
-- [ ] Criar `docker-compose.yml` com PostgreSQL 16 + Redis 7
-- [ ] Configurar variáveis de ambiente com Zod validation (`src/config/env.ts`)
-- [ ] Configurar Vitest + setup de test database
-- [ ] Configurar ESLint + Prettier
-- [ ] Criar `Dockerfile` para produção
-- [ ] Configurar CI básico (lint + test)
+_(nenhum — Épico 1 concluído)_
 
 ### Concluído
 
-_(vazio)_
+- [x] ~~Inicializar projeto Node.js com TypeScript strict mode~~ — `2026-04-03`
+- [x] ~~Configurar Hono como framework HTTP~~ — `2026-04-03` — _Bootstrap em `src/app.ts` + `src/index.ts`; health em `GET /health`_
+- [x] ~~Configurar Drizzle ORM com PostgreSQL driver~~ — `2026-04-03` — _`drizzle.config.ts`, `getDb`/`getPool` em `src/config/database.ts`; schema vazio até Épico 2_
+- [x] ~~Criar `docker-compose.yml` com PostgreSQL 16 + Redis 7~~ — `2026-04-03`
+- [x] ~~Configurar variáveis de ambiente com Zod validation (`src/config/env.ts`)~~ — `2026-04-03`
+- [x] ~~Configurar Vitest + setup de test database~~ — `2026-04-03` — _`tests/setup.ts` com defaults para testes; migrations quando existirem_
+- [x] ~~Configurar ESLint + Prettier~~ — `2026-04-03`
+- [x] ~~Criar `Dockerfile` para produção~~ — `2026-04-03`
+- [x] ~~Configurar CI básico (lint + test)~~ — `2026-04-03` — _Inclui `typecheck` e `format:check`_
 
 ---
 

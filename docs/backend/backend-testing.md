@@ -21,8 +21,11 @@
 - Nomear testes em português: `it('deve criar booking quando slot está disponível')`
 
 ### Setup File (`tests/setup.ts`)
+
+**Estado:** ficheiro presente com carregamento opcional de `.env.test` e defaults mínimos (`DATABASE_URL`, `JWT_SECRET`, etc.) para Vitest. Criar DB de teste, correr migrations, factories e cleanup entram quando o schema e integrações ao PostgreSQL estiverem implementados.
+
 ```typescript
-// Responsabilidades:
+// Responsabilidades (alvo):
 // 1. Criar database de teste se não existe
 // 2. Rodar migrations
 // 3. Exportar app instance configurada para test

@@ -6,6 +6,14 @@ API REST **multi-tenant** para agendamento de serviços: geração de slots, res
 
 A especificação e o backlog vivem em **`docs/`**. A implementação (Node, Hono, Drizzle, etc.) segue o plano descrito na arquitetura; o progresso está rastreado no backlog do backend.
 
+### Desenvolvimento local
+
+1. Node.js **20+** e npm.
+2. `cp .env.example .env` e ajustar segredos (mínimo: `DATABASE_URL`, `JWT_SECRET` com ≥32 caracteres).
+3. `docker compose up -d` para PostgreSQL e Redis (opcional até cache/rate limit).
+4. `npm install` → `npm run dev` — API em `http://localhost:3000` (variável `PORT`).
+5. Qualidade: `npm run lint`, `npm run typecheck`, `npm test`, `npm run format:check`.
+
 ## Stack alvo (backend)
 
 | Área | Tecnologia |
