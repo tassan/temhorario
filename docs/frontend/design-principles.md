@@ -1,4 +1,4 @@
-# Design Principles — agenda-engine Frontend
+# Design Principles — temhorario-engine Frontend
 
 > **⚠️ INSTRUÇÃO PARA AI AGENTS:**
 > Consulte este documento antes de criar qualquer componente visual, página, ou tomar decisões de UI/UX. Estes princípios são obrigatórios, não sugestões.
@@ -7,7 +7,7 @@
 
 ## Filosofia
 
-A agenda-engine serve dois públicos com necessidades opostas:
+O temhorario-engine serve dois públicos com necessidades opostas:
 
 - **Cliente final** (booking page): quer agendar rápido, sem atrito, no celular
 - **Dono do negócio** (admin dashboard): quer controle, visibilidade, produtividade

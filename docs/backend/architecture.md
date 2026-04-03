@@ -1,8 +1,8 @@
-# Backend Architecture — agenda-engine API
+# Backend Architecture — temhorario-engine API
 
 ## Visão Geral
 
-`agenda-engine` é uma API REST multi-tenant de agendamento de serviços. Ela fornece toda a lógica de scheduling (geração de slots, booking, status tracking, gestão de clientes) como um serviço independente que qualquer aplicação pode consumir via HTTP.
+`temhorario-engine` é uma API REST multi-tenant de agendamento de serviços. Ela fornece toda a lógica de scheduling (geração de slots, booking, status tracking, gestão de clientes) como um serviço independente que qualquer aplicação pode consumir via HTTP.
 
 **Stack:**
 - Runtime: Node.js 20+
@@ -20,7 +20,7 @@
 ## Estrutura do Projeto
 
 ```
-agenda-engine/
+temhorario-engine/
 ├── src/
 │   ├── index.ts                    # Entry point — bootstrap Hono app
 │   ├── config/
@@ -497,7 +497,7 @@ interface WebhookPayload {
 
 ```bash
 # Banco
-DATABASE_URL=postgresql://user:pass@host:5432/agenda_engine
+DATABASE_URL=postgresql://user:pass@host:5432/temhorario_engine
 DATABASE_POOL_SIZE=20
 
 # Redis

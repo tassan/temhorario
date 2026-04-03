@@ -1,4 +1,4 @@
-# Rules for Humans — agenda-engine
+# Rules for Humans — temhorario-engine
 
 > Regras e boas práticas para humanos que trabalham com AI agents (Cursor, Claude Code, etc.) neste projeto.
 

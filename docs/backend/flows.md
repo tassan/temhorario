@@ -1,4 +1,4 @@
-# Backend Flows — agenda-engine API
+# Backend Flows — temhorario-engine API
 
 Todos os fluxos principais da API documentados com diagramas Mermaid. Use como referência para implementação e testes.
 
@@ -11,7 +11,7 @@ Este é o fluxo mais importante da engine — é o que o usuário final experime
 ```mermaid
 sequenceDiagram
     participant C as Cliente (Browser)
-    participant API as agenda-engine API
+    participant API as temhorario-engine API
     participant DB as PostgreSQL
     participant WH as Webhook Dispatcher
 
@@ -88,7 +88,7 @@ stateDiagram-v2
 ```mermaid
 sequenceDiagram
     participant A as Admin (Dashboard)
-    participant API as agenda-engine API
+    participant API as temhorario-engine API
     participant DB as PostgreSQL
     participant WH as Webhook Dispatcher
 
@@ -117,7 +117,7 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant A as Admin
-    participant API as agenda-engine API
+    participant API as temhorario-engine API
     participant DB as PostgreSQL
 
     Note over A,API: Login
@@ -153,7 +153,7 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant A as Admin
-    participant API as agenda-engine API
+    participant API as temhorario-engine API
     participant DB as PostgreSQL
 
     Note over A,API: Configurar horário semanal padrão
@@ -208,7 +208,7 @@ flowchart TD
 ```mermaid
 sequenceDiagram
     participant A as Admin
-    participant API as agenda-engine API
+    participant API as temhorario-engine API
     participant DB as PostgreSQL
 
     Note over A,API: Listar serviços
@@ -269,7 +269,7 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant P as Platform Admin / Self-service
-    participant API as agenda-engine API
+    participant API as temhorario-engine API
     participant DB as PostgreSQL
 
     P->>API: POST /v1/platform/tenants { slug, name, config, branding }
@@ -297,7 +297,7 @@ sequenceDiagram
 ```mermaid
 sequenceDiagram
     participant A as Admin
-    participant API as agenda-engine API
+    participant API as temhorario-engine API
     participant DB as PostgreSQL
 
     A->>API: GET /v1/admin/reports/summary?period=month&date=2025-01

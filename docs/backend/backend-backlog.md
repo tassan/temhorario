@@ -1,4 +1,4 @@
-# Backend Backlog — agenda-engine API
+# Backend Backlog — temhorario-engine API
 
 > **⚠️ INSTRUÇÃO PARA AI AGENTS (Cursor / Claude Code):**
 > Este arquivo é a fonte de verdade do progresso do backend. Ao completar qualquer tarefa:

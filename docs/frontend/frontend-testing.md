@@ -1,4 +1,4 @@
-# Frontend Testing — agenda-engine
+# Frontend Testing — temhorario-engine
 
 > **⚠️ INSTRUÇÃO PARA AI AGENTS:**
 > Ao implementar qualquer componente ou página, consulte esta lista para identificar quais testes devem ser escritos. Marque como concluído ao implementar.

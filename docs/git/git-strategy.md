@@ -1,4 +1,4 @@
-# Git Strategy — agenda-engine
+# Git Strategy — temhorario-engine
 
 > Baseado nos princípios de [Trunk Based Development](https://trunkbaseddevelopment.com).
 

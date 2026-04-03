@@ -1,4 +1,4 @@
-# Rules for Agents — agenda-engine
+# Rules for Agents — temhorario-engine
 
 > Regras obrigatórias para qualquer AI agent (Cursor, Claude Code, Copilot, etc.) trabalhando neste projeto.
 

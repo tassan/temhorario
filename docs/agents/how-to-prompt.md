@@ -1,4 +1,4 @@
-# How to Prompt — agenda-engine
+# How to Prompt — temhorario-engine
 
 > Templates e orientações para escrever prompts eficientes ao trabalhar com AI agents neste projeto.
 

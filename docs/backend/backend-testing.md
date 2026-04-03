@@ -1,4 +1,4 @@
-# Backend Testing — agenda-engine API
+# Backend Testing — temhorario-engine API
 
 > **⚠️ INSTRUÇÃO PARA AI AGENTS:**
 > Ao implementar qualquer funcionalidade, consulte esta lista para identificar quais testes devem ser escritos. Ao adicionar testes, marque o item como concluído com a data.

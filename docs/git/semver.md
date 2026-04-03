@@ -1,4 +1,4 @@
-# Semantic Versioning — agenda-engine
+# Semantic Versioning — temhorario-engine
 
 > Baseado nos princípios de [Semantic Versioning 2.0.0](https://semver.org).
 

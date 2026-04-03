@@ -1,4 +1,4 @@
-# Frontend Backlog — agenda-engine
+# Frontend Backlog — temhorario-engine
 
 > **⚠️ INSTRUÇÃO PARA AI AGENTS (Cursor / Claude Code):**
 > Este arquivo é a fonte de verdade do progresso do frontend. Ao completar qualquer tarefa:

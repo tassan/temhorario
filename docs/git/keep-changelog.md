@@ -1,4 +1,4 @@
-# Keep a Changelog — agenda-engine
+# Keep a Changelog — temhorario-engine
 
 > Baseado nos princípios de [Keep a Changelog 1.1.0](https://keepachangelog.com/en/1.1.0/).
 
@@ -63,9 +63,9 @@ e este projeto adere ao [Semantic Versioning](https://semver.org/spec/v2.0.0.htm
 - Configuração de disponibilidade (grade semanal + exceções)
 - Algoritmo de geração de slots disponíveis
 
-[unreleased]: https://github.com/user/agenda-engine/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/user/agenda-engine/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/user/agenda-engine/releases/tag/v0.1.0
+[unreleased]: https://github.com/user/temhorario-engine/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/user/temhorario-engine/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/user/temhorario-engine/releases/tag/v0.1.0
 ```
 
 ---
@@ -137,9 +137,9 @@ Hora da release: Move [Unreleased] → [X.Y.Z] - YYYY-MM-DD
 No final do CHANGELOG, manter links que apontam para o diff entre versões no GitHub:
 
 ```markdown
-[unreleased]: https://github.com/user/agenda-engine/compare/v0.2.0...HEAD
-[0.2.0]: https://github.com/user/agenda-engine/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/user/agenda-engine/releases/tag/v0.1.0
+[unreleased]: https://github.com/user/temhorario-engine/compare/v0.2.0...HEAD
+[0.2.0]: https://github.com/user/temhorario-engine/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/user/temhorario-engine/releases/tag/v0.1.0
 ```
 
 - `[unreleased]` sempre compara a última tag com `HEAD`
