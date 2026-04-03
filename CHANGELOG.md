@@ -8,6 +8,8 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ### Added
 
+- Hook Git **pre-push** (`.githooks/pre-push`) que bloqueia push de branches quando há alterações a ficheiros sem `CHANGELOG.md` no intervalo; script `prepare` + `scripts/setup-hooks.mjs` define `core.hooksPath`. Documentado em `docs/git/git-strategy.md`, `docs/git/keep-changelog.md`, `docs/agents/rules-for-agents.md` e `docs/agents/rules-for-humans.md`.
+
 - Fundação do backend: Node.js 20+, TypeScript strict, Hono (`GET /health`), validação de ambiente com Zod, cliente Drizzle + `pg`, Vitest (integração + unitário), ESLint e Prettier, `docker-compose` (PostgreSQL 16 e Redis 7), `Dockerfile` multi-stage, workflow GitHub Actions (lint, typecheck, Prettier, testes), estrutura de pastas conforme `docs/backend/architecture.md`.
 
 - Documentação em `docs/`: arquitetura da API, fluxos, backlogs, matrizes de testes, convenções de Git, guias para agentes e documentação de frontend.

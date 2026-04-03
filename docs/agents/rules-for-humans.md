@@ -168,6 +168,13 @@ git diff main...HEAD
 git diff main...HEAD -- CHANGELOG.md docs/
 ```
 
+### 5.3 Hook `pre-push` e CHANGELOG
+
+Após `npm install`, o Git usa `.githooks/` (`core.hooksPath`). Um **`git push` de branch** que envia alterações a ficheiros **só passa** se `CHANGELOG.md` estiver entre os ficheiros alterados nesse intervalo. Isto evita pushes “só código” sem registo em [keep-changelog.md](../git/keep-changelog.md).
+
+- **Configurar:** `npm install` na raiz (script `prepare`) ou `git config core.hooksPath .githooks`
+- **Detalhes e excepções (tags, `SKIP_CHANGELOG_HOOK`):** [git-strategy.md](../git/git-strategy.md#git-hooks-pre-push)
+
 ---
 
 ## 6. Manutenção dos Docs

@@ -33,7 +33,7 @@ Documentação para aplicações que consomem a API (dashboard, página pública
 
 | Ficheiro | Descrição |
 |----------|-----------|
-| [git/git-strategy.md](git/git-strategy.md) | Branches, PRs, fluxo de trabalho |
+| [git/git-strategy.md](git/git-strategy.md) | Branches, PRs, fluxo de trabalho, hook **pre-push** (CHANGELOG obrigatório no push) |
 | [git/semver.md](git/semver.md) | Versionamento semântico |
 | [git/keep-changelog.md](git/keep-changelog.md) | Formato e manutenção do changelog |
 

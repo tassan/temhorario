@@ -131,7 +131,7 @@ BREAKING CHANGE: booking response now includes nested resource object instead of
 
 - [ ] Testes passando
 - [ ] Lint passando
-- [ ] CHANGELOG.md atualizado (se relevante)
+- [ ] CHANGELOG.md atualizado (obrigatório quando o push altera ficheiros — hook `pre-push`)
 - [ ] Documentação atualizada (se relevante)
 - [ ] Backlog atualizado
 ```
@@ -198,6 +198,43 @@ git pull origin main
 # A branch remota foi deletada automaticamente
 # Deletar branch local:
 git branch -d feat/nome-da-feature
+```
+
+---
+
+## Git hooks (pre-push)
+
+### O que faz
+
+Antes de enviar para `refs/heads/*`, o hook compara o intervalo de commits a enviar com o estado remoto. Se esse intervalo altera **qualquer ficheiro** e **`CHANGELOG.md` não está** na lista de ficheiros alterados, o `git push` é **bloqueado**.
+
+Isto reforça [keep-changelog.md](keep-changelog.md): toda alteração material acompanha uma entrada (ou revisão) em `CHANGELOG.md`.
+
+### O que não é coberto
+
+- **Tags** (`refs/tags/*`): o hook ignora — o fluxo de release continua a documentar-se em [Releases e Tags](#releases-e-tags).
+- **Push sem commits novos** (já atualizado): não há ficheiros no intervalo — o hook não bloqueia.
+
+### Configuração
+
+O repositório usa hooks versionados em `.githooks/`. Após clonar:
+
+```bash
+npm install   # corre prepare → git config core.hooksPath .githooks
+```
+
+Manualmente: `git config core.hooksPath .githooks` (relativo à raiz do repositório).
+
+### Primeiro push de branch nova
+
+O hook calcula o diff desde o **merge-base** com `origin/main` ou `origin/master`. Faça `git fetch origin` antes do primeiro push. Se não existir trunk remoto, o hook recorre ao pai do commit ou à árvore vazia (casos raros).
+
+### Contorno excecional
+
+Apenas emergências (não usar em rotina):
+
+```bash
+SKIP_CHANGELOG_HOOK=1 git push ...
 ```
 
 ---

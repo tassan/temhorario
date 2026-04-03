@@ -19,6 +19,14 @@ O CHANGELOG é para **humanos**, não para máquinas. Ele comunica o que mudou d
 
 ---
 
+## Enforcement (git hook)
+
+Qualquer `git push` de **branch** que envie alterações a ficheiros deve incluir **`CHANGELOG.md`** nesse conjunto de alterações. O hook está em `.githooks/pre-push`; `core.hooksPath` é configurado ao correr `npm install` (script `prepare`). Pormenores, excepções e `SKIP_CHANGELOG_HOOK`: [git-strategy.md](git-strategy.md#git-hooks-pre-push).
+
+O hook garante que o ficheiro é **alterado** no push quando há outras mudanças; o texto continua a seguir os critérios humanos deste documento.
+
+---
+
 ## Estrutura
 
 ```markdown

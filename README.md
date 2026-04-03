@@ -13,6 +13,7 @@ A especificação e o backlog vivem em **`docs/`**. A implementação (Node, Hon
 3. `docker compose up -d` para PostgreSQL e Redis (opcional até cache/rate limit).
 4. `npm install` → `npm run dev` — API em `http://localhost:3000` (variável `PORT`).
 5. Qualidade: `npm run lint`, `npm run typecheck`, `npm test`, `npm run format:check`.
+6. O `npm install` configura os **git hooks** (`core.hooksPath=.githooks`). Um `git push` de branch que altera ficheiros deve incluir **`CHANGELOG.md`** nesse conjunto — ver [docs/git/git-strategy.md](docs/git/git-strategy.md#git-hooks-pre-push).
 
 ## Stack alvo (backend)
 

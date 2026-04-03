@@ -87,7 +87,13 @@
 - Não criar branches — trabalhar na branch que o humano criou ou indicou
 - Se o humano não especificou branch, perguntar antes de commitar
 
-### 3.3 O Que Nunca Fazer
+### 3.3 Push e CHANGELOG (hook `pre-push`)
+
+- O repositório define `core.hooksPath=.githooks`. O hook **pre-push** bloqueia `git push` de branches quando o intervalo a enviar altera ficheiros mas **não inclui `CHANGELOG.md`**
+- Antes de um push, o conjunto de commits a enviar deve incluir alterações a `CHANGELOG.md` sempre que há outras alterações — ver `docs/git/git-strategy.md` (secção Git hooks)
+- Não recomendar `SKIP_CHANGELOG_HOOK=1` salvo o humano pedir explicitamente (ex.: emergência)
+
+### 3.4 O Que Nunca Fazer
 
 - Nunca fazer `git push` para `main` diretamente
 - Nunca fazer `git force push` sem aprovação explícita
@@ -115,6 +121,8 @@ Se a mudança é notável (ver critérios em `docs/git/keep-changelog.md`):
 1. Abrir `CHANGELOG.md`
 2. Adicionar na seção `[Unreleased]`, na categoria correta
 3. Seguir o formato dos exemplos existentes
+
+Além disso, o **pre-push** exige que `CHANGELOG.md` conste entre os ficheiros alterados em qualquer push de branch que modifique outros ficheiros (ver `docs/git/keep-changelog.md` e `docs/git/git-strategy.md`).
 
 ### 4.3 Atualizar Testes
 
@@ -168,7 +176,7 @@ Sempre reportar:
 - [ ] Nenhum `TODO` adicionado sem contexto (se for TODO, incluir descrição do que falta)
 - [ ] Nenhum `any` adicionado sem comentário explicando
 - [ ] Backlog atualizado
-- [ ] CHANGELOG atualizado (se mudança notável)
+- [ ] CHANGELOG atualizado (notável + obrigatório quando o push altera outros ficheiros — hook `pre-push`)
 - [ ] Nomes de variáveis e funções são claros e descritivos
 
 ### 6.2 Preferências de Código
