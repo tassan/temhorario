@@ -11,9 +11,10 @@ A especificação e o backlog vivem em **`docs/`**. A implementação (Node, Hon
 1. Node.js **20+** e npm.
 2. `cp .env.example .env` ou `.env.local` e ajustar segredos (mínimo: `DATABASE_URL`, `JWT_SECRET` com ≥32 caracteres). Se existirem os dois, **`.env.local` sobrescreve** `.env`.
 3. `docker compose up -d` para PostgreSQL e Redis (opcional até cache/rate limit).
-4. `npm install` → `npm run dev` — API em `http://localhost:3000` (variável `PORT`).
-5. Qualidade: `npm run lint`, `npm run typecheck`, `npm test`, `npm run format:check`.
-6. O `npm install` configura os **git hooks** (`core.hooksPath=.githooks`). Um `git push` de branch que altera ficheiros deve incluir **`CHANGELOG.md`** nesse conjunto — ver [docs/git/git-strategy.md](docs/git/git-strategy.md#git-hooks-pre-push).
+4. `npm install` (configura **git hooks** em `core.hooksPath=.githooks`; pushes de branch exigem `CHANGELOG.md` no conjunto de alterações — ver [docs/git/git-strategy.md](docs/git/git-strategy.md#git-hooks-pre-push)).
+5. `npm run db:migrate` para aplicar migrations (schema + RLS). `npm run db:seed` opcional — tenant demo `demo` (owner `owner@demo.local`, senha `password`).
+6. `npm run dev` — API em `http://localhost:3000` (variável `PORT`).
+7. Qualidade: `npm run lint`, `npm run typecheck`, `npm test`, `npm run format:check`.
 
 ## Stack alvo (backend)
 

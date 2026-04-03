@@ -22,7 +22,7 @@
 
 ### Setup File (`tests/setup.ts`)
 
-**Estado:** ficheiro presente com carregamento opcional de `.env.test` e defaults mínimos (`DATABASE_URL`, `JWT_SECRET`, etc.) para Vitest. Criar DB de teste, correr migrations, factories e cleanup entram quando o schema e integrações ao PostgreSQL estiverem implementados.
+**Estado:** ficheiro presente com carregamento opcional de `.env.test` e defaults mínimos (`DATABASE_URL`, `JWT_SECRET`, etc.) para Vitest. O schema e migrations estão em `src/db/` (Épico 2); `npm run db:migrate` aplica o DDL. Testes de integração contra PostgreSQL (criar DB de teste, `migrate`, cleanup) podem seguir quando os endpoints usarem o pool.
 
 ```typescript
 // Responsabilidades (alvo):

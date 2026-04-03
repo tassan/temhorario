@@ -17,9 +17,9 @@
 
 | Métrica | Valor |
 |---|---|
-| Sprint atual | Setup inicial |
+| Sprint atual | Schema / API |
 | Última atualização | `2026-04-03` |
-| Itens concluídos | 9 (Épico 1) |
+| Itens concluídos | 9 (Épico 1) + 13 (Épico 2) |
 | Itens em andamento | 0 |
 | Itens a fazer | Total abaixo |
 
@@ -35,7 +35,7 @@ _(nenhum — Épico 1 concluído)_
 
 - [x] ~~Inicializar projeto Node.js com TypeScript strict mode~~ — `2026-04-03`
 - [x] ~~Configurar Hono como framework HTTP~~ — `2026-04-03` — _Bootstrap em `src/app.ts` + `src/index.ts`; health em `GET /health`_
-- [x] ~~Configurar Drizzle ORM com PostgreSQL driver~~ — `2026-04-03` — _`drizzle.config.ts`, `getDb`/`getPool` em `src/config/database.ts`; schema vazio até Épico 2_
+- [x] ~~Configurar Drizzle ORM com PostgreSQL driver~~ — `2026-04-03` — _`drizzle.config.ts`, `getDb`/`getPool` em `src/config/database.ts`; schema em `src/db/schema/` (Épico 2)_
 - [x] ~~Criar `docker-compose.yml` com PostgreSQL 16 + Redis 7~~ — `2026-04-03`
 - [x] ~~Configurar variáveis de ambiente com Zod validation (`src/config/env.ts`)~~ — `2026-04-03`
 - [x] ~~Configurar Vitest + setup de test database~~ — `2026-04-03` — _`tests/setup.ts` com defaults para testes; migrations quando existirem_
@@ -49,23 +49,23 @@ _(nenhum — Épico 1 concluído)_
 
 ### A Fazer
 
-- [ ] Criar schema Drizzle: tabela `tenants`
-- [ ] Criar schema Drizzle: tabela `users` (admin do tenant)
-- [ ] Criar schema Drizzle: tabela `services`
-- [ ] Criar schema Drizzle: tabela `resources` + `resource_services` (M2M)
-- [ ] Criar schema Drizzle: tabela `availability_rules`
-- [ ] Criar schema Drizzle: tabela `clients`
-- [ ] Criar schema Drizzle: tabela `bookings`
-- [ ] Criar schema Drizzle: tabela `api_keys`
-- [ ] Gerar migration inicial com `drizzle-kit generate`
-- [ ] Configurar Row Level Security (RLS) policies
-- [ ] Criar índices de performance conforme `architecture.md`
-- [ ] Criar seed data para ambiente de desenvolvimento
-- [ ] Criar test factories (`tests/factories/`)
+_(nenhum — Épico 2 concluído)_
 
 ### Concluído
 
-_(vazio)_
+- [x] ~~Criar schema Drizzle: tabela `tenants`~~ — `2026-04-03`
+- [x] ~~Criar schema Drizzle: tabela `users` (admin do tenant)~~ — `2026-04-03`
+- [x] ~~Criar schema Drizzle: tabela `services`~~ — `2026-04-03`
+- [x] ~~Criar schema Drizzle: tabela `resources` + `resource_services` (M2M)~~ — `2026-04-03`
+- [x] ~~Criar schema Drizzle: tabela `availability_rules`~~ — `2026-04-03`
+- [x] ~~Criar schema Drizzle: tabela `clients`~~ — `2026-04-03`
+- [x] ~~Criar schema Drizzle: tabela `bookings`~~ — `2026-04-03`
+- [x] ~~Criar schema Drizzle: tabela `api_keys`~~ — `2026-04-03`
+- [x] ~~Gerar migration inicial com `drizzle-kit generate`~~ — `2026-04-03` — _`npm run db:generate` via `tsx` (imports `.ts`); ficheiros em `src/db/migrations/`_
+- [x] ~~Configurar Row Level Security (RLS) policies~~ — `2026-04-03` — _Migration `0001_row_level_security.sql`; `set_config('app.current_tenant_id', ...)` documentado no SQL_
+- [x] ~~Criar índices de performance conforme `architecture.md`~~ — `2026-04-03`
+- [x] ~~Criar seed data para ambiente de desenvolvimento~~ — `2026-04-03` — _`npm run db:seed`; tenant `demo`, owner `owner@demo.local` / senha `password`_
+- [x] ~~Criar test factories (`tests/factories/`)~~ — `2026-04-03` — _tenant, client, booking + teste unitário_
 
 ---
 

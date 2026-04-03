@@ -1,6 +1,14 @@
-import 'dotenv/config';
+import { config } from 'dotenv';
+import { existsSync } from 'node:fs';
+import { resolve } from 'node:path';
 
 import { defineConfig } from 'drizzle-kit';
+
+const root = process.cwd();
+config({ path: resolve(root, '.env') });
+if (existsSync(resolve(root, '.env.local'))) {
+  config({ path: resolve(root, '.env.local'), override: true });
+}
 
 export default defineConfig({
   schema: './src/db/schema/index.ts',

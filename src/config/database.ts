@@ -2,6 +2,7 @@ import { drizzle } from 'drizzle-orm/node-postgres';
 import pg from 'pg';
 
 import type { Env } from './env.js';
+import * as schema from '../db/schema/index.js';
 
 let pool: pg.Pool | undefined;
 
@@ -14,5 +15,5 @@ export function getPool(env: Env): pg.Pool {
 }
 
 export function getDb(env: Env) {
-  return drizzle(getPool(env));
+  return drizzle(getPool(env), { schema });
 }
