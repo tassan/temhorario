@@ -74,11 +74,11 @@ stateDiagram-v2
     cancelled --> [*]
     no_show --> [*]
 
-    note right of scheduled: Webhook: booking.created
-    note right of confirmed: Webhook: booking.confirmed
-    note right of in_progress: Webhook: booking.started
-    note right of completed: Webhook: booking.completed
-    note right of cancelled: Webhook: booking.cancelled
+    note right of scheduled: Webhook - booking.created
+    note right of confirmed: Webhook - booking.confirmed
+    note right of in_progress: Webhook - booking.started
+    note right of completed: Webhook - booking.completed
+    note right of cancelled: Webhook - booking.cancelled
 ```
 
 ---
