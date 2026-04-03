@@ -8,8 +8,9 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ### Added
 
+- `npm run db:ensure` (`scripts/ensure-postgres-docker.ts`) + `docker/postgres/init/01-ensure-role.sql` montado em `docker-entrypoint-initdb.d`: garante role `postgres` (password do compose) e base `temhorario_engine`; `db:migrate:docker` / `db:seed:docker` executam `db:ensure` antes.
 - `npm run db:migrate:docker` e `.env.docker` para migrar contra o Postgres do `docker-compose` quando `DATABASE_URL` / `.env.local` apontam para outro servidor; mensagem de ajuda em `28P01` em `scripts/migrate.ts`.
-- **Testes / migrate:** `tests/setup.ts` ignora `DATABASE_URL` herdada do shell em ambientes não-CI e usa por omissão `postgresql://postgres:postgres@127.0.0.1:5432/temhorario_test` (sobrescrever com `VITEST_DATABASE_URL` ou CI). `MIGRATE_DATABASE_URL` em `load-env-files.ts` permite migrar um DB sem ser sobrescrito por `.env.local`.
+- **Testes / migrate:** `tests/setup.ts` ignora `DATABASE_URL` herdada do shell; fora de CI usa por omissão `127.0.0.1:5433/temhorario_test` (CI: `5432`). `MIGRATE_DATABASE_URL` em `load-env-files.ts` permite migrar sem ser sobrescrito por `.env.local`.
 
 ### Changed
 
@@ -20,6 +21,8 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 - **Épico 2 — schema PostgreSQL:** tabelas `tenants`, `users`, `services`, `resources`, `resource_services`, `availability_rules`, `clients`, `bookings`, `api_keys`; enums; índices conforme `docs/backend/architecture.md`; relações Drizzle; RLS (`0001_row_level_security.sql`). Migrations em `src/db/migrations/`, `npm run db:migrate`, `npm run db:generate` (via `tsx`). Seed `npm run db:seed` (tenant `demo`). Factories em `tests/factories/` e `bcrypt` como devDependency para hash no seed.
 
 ### Fixed
+
+- Vitest `tests/setup.ts`: URL por omissão fora de CI usa porta **5433** (docker-compose local), não **5432**. `db:ensure` cria também `temhorario_test`. `db:migrate:docker` / `db:migrate:test:docker` usam **`cross-env`** para fixar `MIGRATE_DATABASE_URL` (o `node --env-file` **não** substitui variáveis já definidas no shell — causava 28P01). Ficheiro `.env.test.docker` continua como referência.
 
 - `docker-compose.yml`: mapeamento de portas do Postgres corrigido para `5433:5432` (antes `5433:5433`, o que quebrava ligações ao contentor). `.env.docker` voltou a ser mínimo com `MIGRATE_DATABASE_URL` + `sslmode=disable`; mensagem em `migrate` para "Connection terminated unexpectedly".
 

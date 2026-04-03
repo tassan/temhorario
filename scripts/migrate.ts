@@ -1,5 +1,13 @@
 import '../src/config/load-env-files.js';
 
+/**
+ * `node --env-file=...` define `MIGRATE_DATABASE_URL` no processo antes deste ficheiro;
+ * reforçamos aqui porque o snapshot em `load-env-files` pode correr noutra ordem com tsx.
+ */
+if (process.env.MIGRATE_DATABASE_URL !== undefined && process.env.MIGRATE_DATABASE_URL !== '') {
+  process.env.DATABASE_URL = process.env.MIGRATE_DATABASE_URL;
+}
+
 import { migrate } from 'drizzle-orm/node-postgres/migrator';
 import { drizzle } from 'drizzle-orm/node-postgres';
 import pg from 'pg';

@@ -11,8 +11,10 @@ const databaseUrlFromCi = isCi ? process.env.DATABASE_URL : undefined;
 delete process.env.DATABASE_URL;
 config({ path: envTestPath, override: true });
 
-/** URL alinhada ao `docker-compose` (postgres/postgres). Sobrescrever com `VITEST_DATABASE_URL`. */
-const defaultTestDatabaseUrl = 'postgresql://postgres:postgres@127.0.0.1:5432/temhorario_test';
+/** CI (GitHub Actions): Postgres serviço na 5432. Local com docker-compose deste repo: host 5433. */
+const defaultTestDatabaseUrl = isCi
+  ? 'postgresql://postgres:postgres@127.0.0.1:5432/temhorario_test'
+  : 'postgresql://postgres:postgres@127.0.0.1:5433/temhorario_test';
 
 function pickDatabaseUrl(url: string | undefined, fallback: string): string {
   return url !== undefined && url !== '' ? url : fallback;

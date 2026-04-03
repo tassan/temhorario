@@ -22,7 +22,7 @@
 
 ### Setup File (`tests/setup.ts`)
 
-**Estado:** ficheiro presente com carregamento opcional de `.env.test` e defaults mínimos (`DATABASE_URL`, `JWT_SECRET`, etc.) para Vitest. O schema e migrations estão em `src/db/` (Épico 2); `npm run db:migrate` aplica o DDL. Testes de integração contra PostgreSQL (criar DB de teste, `migrate`, cleanup) podem seguir quando os endpoints usarem o pool.
+**Estado:** ficheiro presente com carregamento opcional de `.env.test` e defaults mínimos (`DATABASE_URL`, `JWT_SECRET`, etc.) para Vitest. **Local com Docker** (`docker-compose` na 5433): URL por omissão em `tests/setup.ts` aponta para `127.0.0.1:5433/temhorario_test`. Antes de `npm test`, correr `npm run db:migrate:test:docker` (garante bases + migrations em `temhorario_test`; usa `cross-env` para `MIGRATE_DATABASE_URL` porque `node --env-file` não sobrescreve variáveis já definidas no shell). **CI:** Postgres serviço na 5432 — `DATABASE_URL` no workflow.
 
 ```typescript
 // Responsabilidades (alvo):
