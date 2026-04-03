@@ -6,6 +6,11 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ## [Unreleased]
 
+### Fixed
+
+- Carregamento de variáveis: `.env.local` é lido (após `.env`) para `npm run dev`, alinhado a cópias a partir de `.env.example`.
+- ESLint: ignorar `scripts/**` para evitar regras com type information em `setup-hooks.mjs`.
+
 ### Added
 
 - Hook Git **pre-push** (`.githooks/pre-push`) que bloqueia push de branches quando há alterações a ficheiros sem `CHANGELOG.md` no intervalo; script `prepare` + `scripts/setup-hooks.mjs` define `core.hooksPath`. Documentado em `docs/git/git-strategy.md`, `docs/git/keep-changelog.md`, `docs/agents/rules-for-agents.md` e `docs/agents/rules-for-humans.md`.

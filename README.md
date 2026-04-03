@@ -9,7 +9,7 @@ A especificação e o backlog vivem em **`docs/`**. A implementação (Node, Hon
 ### Desenvolvimento local
 
 1. Node.js **20+** e npm.
-2. `cp .env.example .env` e ajustar segredos (mínimo: `DATABASE_URL`, `JWT_SECRET` com ≥32 caracteres).
+2. `cp .env.example .env` ou `.env.local` e ajustar segredos (mínimo: `DATABASE_URL`, `JWT_SECRET` com ≥32 caracteres). Se existirem os dois, **`.env.local` sobrescreve** `.env`.
 3. `docker compose up -d` para PostgreSQL e Redis (opcional até cache/rate limit).
 4. `npm install` → `npm run dev` — API em `http://localhost:3000` (variável `PORT`).
 5. Qualidade: `npm run lint`, `npm run typecheck`, `npm test`, `npm run format:check`.
