@@ -6,6 +6,10 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 ## [Unreleased]
 
+### Changed
+
+- Documentação Git: regra explícita de que **toda branch mergeada para `main` deve ser eliminada** (remota e local); checklist de PR e guias para agentes/humanos actualizados.
+
 ### Added
 
 - **Épico 2 — schema PostgreSQL:** tabelas `tenants`, `users`, `services`, `resources`, `resource_services`, `availability_rules`, `clients`, `bookings`, `api_keys`; enums; índices conforme `docs/backend/architecture.md`; relações Drizzle; RLS (`0001_row_level_security.sql`). Migrations em `src/db/migrations/`, `npm run db:migrate`, `npm run db:generate` (via `tsx`). Seed `npm run db:seed` (tenant `demo`). Factories em `tests/factories/` e `bcrypt` como devDependency para hash no seed.

@@ -30,7 +30,7 @@ feat/booking-api ─┘    │    fix/slot-race ──────┘
 3. **Uma branch por dev por vez.** Não acumular branches abertas.
 4. **Merge via Pull Request** (mesmo trabalhando solo — o PR é o registro e ponto de CI).
 5. **Squash merge** como padrão — mantém o histórico de `main` limpo.
-6. **Delete branch após merge** — branches mergeadas são lixo.
+6. **Eliminar a branch após merge em `main` (obrigatório)** — toda branch cujo trabalho já entrou em `main` deve ser apagada **no remoto** e **localmente**. Não deixar branches mergeadas abertas (evita lixo, confusão e PRs duplicados).
 
 ---
 
@@ -134,6 +134,7 @@ BREAKING CHANGE: booking response now includes nested resource object instead of
 - [ ] CHANGELOG.md atualizado (obrigatório quando o push altera ficheiros — hook `pre-push`)
 - [ ] Documentação atualizada (se relevante)
 - [ ] Backlog atualizado
+- [ ] Após merge: branch eliminada no GitHub/GitLab **e** localmente (`git branch -d …`)
 ```
 
 ### Merge Strategy
@@ -190,13 +191,28 @@ git push --force-with-lease
 
 ### 5. Merge e cleanup
 
+**Regra:** assim que o merge para `main` estiver concluído, **eliminar a branch de feature** (remota + local). Sem excepções de rotina.
+
+**Merge via PR (GitHub / GitLab):** ao fazer merge, activar **“Delete branch”** no remoto (ou apagar manualmente: `git push origin --delete feat/nome-da-feature`).
+
+**Merge local** (sem interface web): após `git merge` em `main` e `git push origin main`:
+
 ```bash
-# Após merge no GitHub (squash):
+git branch -d feat/nome-da-feature
+git push origin --delete feat/nome-da-feature
+```
+
+Depois sincronizar:
+
+```bash
+# Após merge no GitHub (squash) ou push de main:
 git checkout main
 git pull origin main
 
-# A branch remota foi deletada automaticamente
-# Deletar branch local:
+# Se o remoto ainda não apagou a branch, apagar:
+# git push origin --delete feat/nome-da-feature
+
+# Branch local (se ainda existir):
 git branch -d feat/nome-da-feature
 ```
 
@@ -294,7 +310,7 @@ Se um bug é descoberto em produção:
 | Force push em main | Reescreve histórico compartilhado |
 | Commit direto em main sem PR | Sem CI, sem registro, sem revisão |
 | Branches de release ou develop | Complexidade desnecessária neste estágio |
-| Manter branches mergeadas | Lixo visual, confusão sobre o que é ativo |
+| Manter branches já mergeadas em `main` | Viola a regra obrigatória de apagar branch após merge; lixo e confusão |
 | Commit com mensagem genérica ("fix", "wip", "update") | Histórico ilegível, CHANGELOG impossível |
 
 ---

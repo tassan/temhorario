@@ -149,6 +149,7 @@ Se o agent fez alguma dessas coisas, pare e revise com cuidado:
 | Push | Humano ou Agent (quando confiante) |
 | Abrir PR | Humano |
 | Aprovar/mergear PR | Humano |
+| Apagar branch após merge em `main` (remota + local) | Humano |
 | Criar tags e releases | Humano |
 | Decidir versão (SemVer) | Humano |
 
@@ -174,6 +175,10 @@ Após `npm install`, o Git usa `.githooks/` (`core.hooksPath`). Um **`git push` 
 
 - **Configurar:** `npm install` na raiz (script `prepare`) ou `git config core.hooksPath .githooks`
 - **Detalhes e excepções (tags, `SKIP_CHANGELOG_HOOK`):** [git-strategy.md](../git/git-strategy.md#git-hooks-pre-push)
+
+### 5.4 Após merge para `main`
+
+Toda branch integrada em `main` deve ser **removida** (interface do GitHub/GitLab ou `git push origin --delete …`) e a cópia local apagada (`git branch -d …`). Ver [git-strategy.md](../git/git-strategy.md) (regras do modelo de branches e secção «Merge e cleanup»).
 
 ---
 

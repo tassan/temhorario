@@ -86,6 +86,7 @@
 
 - Não criar branches — trabalhar na branch que o humano criou ou indicou
 - Se o humano não especificou branch, perguntar antes de commitar
+- Após merge para `main`, a branch de feature deve ser **eliminada** (remota e local) — ver `docs/git/git-strategy.md`. Não deixar branches mergeadas abertas; lembrar o humano se o merge foi feito e a branch ainda existir
 
 ### 3.3 Push e CHANGELOG (hook `pre-push`)
 
@@ -98,7 +99,7 @@
 - Nunca fazer `git push` para `main` diretamente
 - Nunca fazer `git force push` sem aprovação explícita
 - Nunca alterar histórico de commits que já foram pusheados
-- Nunca deletar branches que não foram mergeadas
+- Nunca deletar branches que **não** foram mergeadas (sem confirmação explícita do humano)
 
 ---
 
