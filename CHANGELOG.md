@@ -18,4 +18,6 @@ O formato é baseado em [Keep a Changelog](https://keepachangelog.com/en/1.1.0/)
 
 - Referências ao nome do projeto nas documentações: `agenda-engine` → `temhorario-engine` (incluindo exemplo de base de dados `temhorario_engine`).
 
+- Documentação do frontend (`docs/frontend/architecture.md`, `docs/frontend/flows.md`): nomenclatura TemHorario Engine, relação com o repositório actual (só API), URLs e variáveis de ambiente de exemplo; endpoints admin e públicos alinhados ao prefixo `/v1/` e a `docs/backend/flows.md`. Índice em `docs/README.md` e tabela no `README.md` actualizados.
+
 <!-- Após o primeiro tag de versão, adicionar rodapé com links [Unreleased] e [X.Y.Z] para comparação e releases no GitHub, conforme docs/git/keep-changelog.md. -->

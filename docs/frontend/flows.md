@@ -1,6 +1,8 @@
-# Frontend Flows — agenda-engine UI/UX
+# Frontend Flows — TemHorario Engine UI/UX
 
-Todos os fluxos de interação do usuário documentados com diagramas Mermaid.
+Todos os fluxos de interação do utilizador documentados com diagramas Mermaid. Os endpoints da API devem coincidir com [docs/backend/flows.md](../backend/flows.md) (prefixo `/v1/`).
+
+**Estado actual do código:** apenas a API está implementada no repositório; estes fluxos descrevem o comportamento alvo do app Next.js quando existir.
 
 ---
 
@@ -10,18 +12,18 @@ O fluxo principal do produto — a experiência que o cliente final vive ao agen
 
 ```mermaid
 flowchart TD
-    A[Cliente abre link<br/>slug.agenda-engine.com/agendar] --> B[Carrega info do tenant<br/>GET /v1/slug/info]
+    A[Cliente abre link<br/>/:slug/agendar] --> B[Carrega info do tenant<br/>GET /v1/:slug/info]
     B --> C[Aplica branding<br/>logo, cores, nome]
-    C --> D[Carrega serviços<br/>GET /v1/slug/services]
+    C --> D[Carrega serviços<br/>GET /v1/:slug/services]
     D --> E[Step 1: Escolher Serviço]
 
     E --> F[Step 2: Escolher Data]
-    F --> G[Carrega slots<br/>GET /v1/slug/availability]
+    F --> G[Carrega slots<br/>GET /v1/:slug/availability]
     G --> H[Step 3: Escolher Horário]
 
     H --> I[Step 4: Preencher Dados]
     I --> |Nome, Telefone, campos custom| J[Step 5: Revisar e Confirmar]
-    J --> K[POST /v1/slug/bookings]
+    J --> K[POST /v1/:slug/bookings]
 
     K --> L{Sucesso?}
     L -->|201| M[Tela de Confirmação<br/>Booking ID + detalhes]
@@ -106,7 +108,7 @@ flowchart LR
 sequenceDiagram
     participant U as Admin (Browser)
     participant App as Next.js App
-    participant API as agenda-engine API
+    participant API as temhorario-engine API
 
     U->>App: Acessa /dashboard
     App->>App: Auth guard: verifica token
@@ -135,8 +137,8 @@ sequenceDiagram
 flowchart TD
     A[Admin abre /dashboard] --> B[Carrega dados em paralelo]
 
-    B --> C[GET /admin/bookings?date=hoje]
-    B --> D[GET /admin/reports/summary?period=day]
+    B --> C[GET /v1/admin/bookings?date=hoje]
+    B --> D[GET /v1/admin/reports/summary?period=day]
 
     C --> E[Agenda Visual do Dia]
     D --> F[Cards de Métricas]
@@ -154,7 +156,7 @@ flowchart TD
     G3 --> H[Booking Detail Sheet]
     H --> H1[Info completa]
     H --> H2[Ações: Confirmar / Iniciar / Concluir]
-    H2 --> I[PATCH /admin/bookings/id]
+    H2 --> I[PATCH /v1/admin/bookings/:id]
     I --> J[Optimistic update na UI]
 ```
 
@@ -204,14 +206,14 @@ flowchart TD
 
     E --> H[Form: nome, duração, preço]
     H --> I[Opcional: custom fields]
-    I --> J[POST /admin/services]
+    I --> J[POST /v1/admin/services]
     J --> K[Atualiza lista]
 
     F --> L[Form preenchido com dados atuais]
-    L --> M[PUT /admin/services/id]
+    L --> M[PUT /v1/admin/services/:id]
     M --> K
 
-    G --> N[DELETE /admin/services/id]
+    G --> N[DELETE /v1/admin/services/:id]
     N --> K
 ```
 
@@ -229,14 +231,14 @@ flowchart TD
     E -->|Editar horário semanal| F[Modal: Configurar Semana]
     F --> F1[Para cada dia: toggle ativo + horário início/fim]
     F --> F2[Suporte a múltiplas janelas por dia]
-    F --> F3[PUT /admin/availability]
+    F --> F3[PUT /v1/admin/availability]
 
     E -->|Adicionar exceção| G[Modal: Exceção]
     G --> G1[Selecionar data]
     G --> G2{Tipo}
     G2 -->|Bloqueio| G3[Dia inteiro indisponível]
     G2 -->|Horário especial| G4[Horário diferente do padrão]
-    G --> G5[POST /admin/availability/exceptions]
+    G --> G5[POST /v1/admin/availability/exceptions]
 
     F3 --> H[Atualiza grid visual]
     G5 --> H
@@ -250,7 +252,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[Admin abre /bookings] --> B[GET /admin/bookings com filtros]
+    A[Admin abre /bookings] --> B[GET /v1/admin/bookings com filtros]
 
     B --> C[Tabela de bookings]
     C --> C1[Colunas: Data, Hora, Serviço, Cliente, Status, Ações]
@@ -279,7 +281,7 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[Admin abre /clients] --> B[GET /admin/clients]
+    A[Admin abre /clients] --> B[GET /v1/admin/clients]
 
     B --> C[Lista de clientes]
     C --> C1[Busca por nome ou telefone]
@@ -288,7 +290,7 @@ flowchart TD
     C2 --> D[Clique no cliente]
     D --> E[Detalhe do cliente]
     E --> E1[Dados cadastrais]
-    E --> E2[GET /admin/clients/id/history]
+    E --> E2[GET /v1/admin/clients/:id/history]
     E2 --> E3[Timeline de bookings passados]
     E3 --> E4[Cada item: serviço, data, status]
 ```
@@ -299,8 +301,8 @@ flowchart TD
 
 ```mermaid
 flowchart TD
-    A[Cliente recebe link ou booking ID] --> B[Abre /slug/booking/id]
-    B --> C[GET /v1/slug/bookings/id]
+    A[Cliente recebe link ou booking ID] --> B[Abre /:slug/booking/:id]
+    B --> C[GET /v1/:slug/bookings/:id]
 
     C --> D{Status atual}
     D -->|scheduled| E[Ícone relógio<br/>Seu agendamento foi recebido]
@@ -354,7 +356,7 @@ flowchart LR
 ```mermaid
 flowchart TD
     subgraph Fontes de Dados
-        API[agenda-engine API]
+        API[temhorario-engine API]
     end
 
     subgraph Cache Layer

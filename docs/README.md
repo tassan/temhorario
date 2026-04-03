@@ -21,6 +21,8 @@ Documentação para aplicações que consomem a API (dashboard, página pública
 
 | Ficheiro | Descrição |
 |----------|-----------|
+| [frontend/architecture.md](frontend/architecture.md) | Stack Next.js, estrutura de pastas, React Query, auth, theming |
+| [frontend/flows.md](frontend/flows.md) | Fluxos UI/UX e encadeamento com endpoints `/v1/...` |
 | [frontend/design-principles.md](frontend/design-principles.md) | Princípios de UX e produto |
 | [frontend/frontend-backlog.md](frontend/frontend-backlog.md) | Backlog do frontend |
 | [frontend/frontend-testing.md](frontend/frontend-testing.md) | Matriz e convenções de testes do frontend |

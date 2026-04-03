@@ -1,13 +1,19 @@
-# Frontend Architecture — agenda-engine
+# Frontend Architecture — TemHorario Engine
 
 ## Visão Geral
 
-O frontend da agenda-engine é composto por duas aplicações distintas que consomem a mesma API:
+O frontend do **TemHorario Engine** é composto por duas aplicações distintas que consomem a **API temhorario-engine** (REST, multi-tenant):
 
 1. **Booking Page** — Página pública onde clientes finais agendam serviços
 2. **Admin Dashboard** — Painel para o dono do negócio gerenciar agenda, clientes e relatórios
 
-Ambas vivem no mesmo repositório Next.js e compartilham componentes, mas têm perfis de uso completamente diferentes.
+Ambas são planejadas para viver no **mesmo repositório Next.js** (pasta `frontend/` na raiz) e compartilhar componentes, mas têm perfis de uso completamente diferentes.
+
+### Relação com este repositório
+
+**Estado actual:** este repositório contém a implementação da **API** (`src/`, Hono, etc.). A pasta `frontend/` ainda não existe — o arranque do app Next.js está no [frontend-backlog.md](frontend-backlog.md) (Épico 1). O layout abaixo aplica-se quando o frontend for criado (monorepo aqui ou repositório irmão).
+
+**Contrato HTTP:** rotas e payloads seguem [docs/backend/flows.md](../backend/flows.md) e [docs/backend/architecture.md](../backend/architecture.md). Prefixo comum: `/v1/...` (público por `slug`, admin sob `/v1/admin/...`).
 
 **Stack:**
 - Framework: Next.js 14+ (App Router)
@@ -144,7 +150,7 @@ frontend/
 
 **Perfil:** Mobile-first, performance crítica, zero fricção.
 
-- URL: `{slug}.agenda-engine.com/agendar` (ou subdomínio do consumer)
+- URL: base `NEXT_PUBLIC_APP_URL` + `/{slug}/agendar`, ou subdomínio `{slug}.domínio-do-consumidor` conforme deploy
 - SSR na primeira carga (SEO + performance)
 - Client-side interações após hidratação
 - Tema dinâmico baseado no branding do tenant
@@ -160,7 +166,7 @@ Abre link → Vê serviços → Escolhe serviço → Escolhe data → Escolhe ho
 
 **Perfil:** Desktop-first (responsivo), produtividade, informação densa.
 
-- URL: `agenda-engine.com/dashboard` (ou rota do consumer)
+- URL: base `NEXT_PUBLIC_APP_URL` + `/dashboard` (ou prefixo definido pelo consumidor)
 - SPA com client-side routing dentro do layout admin
 - Auth guard: redireciona para login se não autenticado
 - Auto-refresh de dados da agenda (polling ou futuro WebSocket)
@@ -318,12 +324,12 @@ Preparar desde o início:
 ## Variáveis de Ambiente (Frontend)
 
 ```bash
-# API
-NEXT_PUBLIC_API_URL=https://api.agenda-engine.com
-NEXT_PUBLIC_APP_URL=https://agenda-engine.com
+# API (base URL da temhorario-engine)
+NEXT_PUBLIC_API_URL=https://api.temhorario.example
+NEXT_PUBLIC_APP_URL=https://app.temhorario.example
 
-# Auth
-NEXT_PUBLIC_JWT_COOKIE_NAME=ae_session
+# Auth (nome do cookie ou storage; alinhar com o que o app definir)
+NEXT_PUBLIC_JWT_COOKIE_NAME=th_session
 
 # Analytics (futuro)
 NEXT_PUBLIC_ANALYTICS_ID=
@@ -335,6 +341,7 @@ NEXT_PUBLIC_ANALYTICS_ID=
 
 | Decisão | Justificativa |
 |---|---|
+| Contrato com a API | Endpoints, autenticação e erros seguem [docs/backend/flows.md](../backend/flows.md) e [docs/backend/architecture.md](../backend/architecture.md) (`/v1/...`) |
 | Next.js App Router | SSR para booking page (SEO, performance), RSC para admin |
 | shadcn/ui | Componentes acessíveis, customizáveis, sem vendor lock-in |
 | React Query | Cache automático, optimistic updates, refetch strategies |

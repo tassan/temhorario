@@ -37,6 +37,8 @@ Deploy previsto: **Railway** ou **Render** (ver `docs/backend/architecture.md`).
 | [docs/backend/flows.md](docs/backend/flows.md) | Fluxos principais (booking público, admin, diagramas) |
 | [docs/backend/backend-backlog.md](docs/backend/backend-backlog.md) | Backlog e estado de implementação do backend |
 | [docs/backend/backend-testing.md](docs/backend/backend-testing.md) | Matriz de testes do backend |
+| [docs/frontend/architecture.md](docs/frontend/architecture.md) | Arquitetura do app Next.js (booking + admin) |
+| [docs/frontend/flows.md](docs/frontend/flows.md) | Fluxos de UI e chamadas à API |
 | [docs/frontend/design-principles.md](docs/frontend/design-principles.md) | Princípios do frontend consumidor |
 | [docs/frontend/frontend-backlog.md](docs/frontend/frontend-backlog.md) | Backlog do frontend |
 | [docs/agents/rules-for-agents.md](docs/agents/rules-for-agents.md) | Convenções para agentes (Cursor / IA) neste repo |
